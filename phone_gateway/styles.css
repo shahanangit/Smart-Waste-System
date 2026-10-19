@@ -1,0 +1,17 @@
+:root { font-family: system-ui, sans-serif; color-scheme: light dark; }
+body { margin:0; background:#111; color:#eee; }
+main { max-width:980px; margin:auto; padding:20px; }
+.card { background:#1d1d1d; border:1px solid #333; border-radius:12px; padding:16px; margin:12px 0; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+.status-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+.status-grid .card { display:flex; flex-direction:column; gap:8px; }
+label { display:flex; flex-direction:column; gap:6px; font-size:.9rem; }
+input { padding:10px; border-radius:8px; border:1px solid #555; background:#151515; color:#fff; }
+button { padding:10px 14px; border:0; border-radius:8px; cursor:pointer; font-weight:600; }
+.buttons { display:flex; gap:10px; flex-wrap:wrap; }
+.camera-wrap { display:grid; grid-template-columns:minmax(0,2fr) minmax(200px,1fr); gap:16px; }
+video { width:100%; min-height:260px; background:#000; border-radius:10px; object-fit:cover; }
+.prediction { display:grid; gap:12px; align-content:start; }
+.muted { color:#aaa; }
+pre { white-space:pre-wrap; overflow:auto; }
+@media (max-width:700px){ .camera-wrap { grid-template-columns:1fr; } }

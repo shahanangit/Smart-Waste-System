@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Smartphone Waste Gateway</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Smartphone Waste Gateway</h1>
+    <p class="muted">Local camera inference → MQTT → smart-bin sorting flap</p>
+
+    <section class="card grid">
+      <label>Team ID<input id="teamId" value="teamXX"></label>
+      <label>Bin ID<input id="binId" value="bin01"></label>
+      <label>Phone ID<input id="phoneId" value="phone01"></label>
+      <label>Teachable Machine model URL<input id="modelUrl" placeholder="https://teachablemachine.withgoogle.com/models/z2hsGsx8S/"></label>
+      <label>HiveMQ WSS URL<input id="brokerUrl" placeholder="wss://YOUR_CLUSTER.s1.eu.hivemq.cloud:8884/mqtt"></label>
+      <label>MQTT username<input id="username" autocomplete="username"></label>
+      <label>MQTT password<input id="password" type="password" autocomplete="current-password"></label>
+      <label>Confidence threshold<input id="threshold" type="number" min="0" max="1" step="0.01" value="0.80"></label>
+      <label>Stable frames<input id="stableFrames" type="number" min="1" max="20" value="3"></label>
+      <label>Score margin<input id="scoreMargin" type="number" min="0" max="1" step="0.01" value="0.15"></label>
+      <label>Reset absence frames<input id="resetFrames" type="number" min="1" max="30" value="4"></label>
+      <label>Cooldown ms<input id="cooldown" type="number" min="0" value="5000"></label>
+    </section>
+
+    <section class="card buttons">
+      <button id="connectBtn">Connect MQTT</button>
+      <button id="startBtn">Start camera + model</button>
+      <button id="stopBtn">Stop</button>
+      <button id="gpsBtn">Update GPS</button>
+    </section>
+
+    <section class="status-grid">
+      <div class="card"><strong>MQTT</strong><span id="mqttState">Disconnected</span></div>
+      <div class="card"><strong>Model</strong><span id="modelState">Not loaded</span></div>
+      <div class="card"><strong>Camera</strong><span id="cameraState">Stopped</span></div>
+      <div class="card"><strong>GPS</strong><span id="gpsState">Not requested</span></div>
+    </section>
+
+    <section class="card camera-wrap">
+      <video id="video" autoplay playsinline muted></video>
+      <div class="prediction">
+        <div>Top class: <strong id="topClass">—</strong></div>
+        <div>Mapped bin: <strong id="mappedBin">—</strong></div>
+        <div>Confidence: <strong id="confidence">—</strong></div>
+        <div>Inference: <strong id="inferenceMs">—</strong> ms</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Manual assessment test</h2>
+      <p class="muted">Uses the same event contract as camera inference.</p>
+      <div class="buttons">
+        <button data-label="recycled" class="manual">Recycled</button>
+        <button data-label="green" class="manual">Green</button>
+        <button data-label="landfill" class="manual">Landfill</button>
+        <button data-label="unknown" class="manual">Unknown</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Last MQTT payload</h2>
+      <pre id="lastPayload">No message published yet.</pre>
+    </section>
+
+    <section class="card">
+      <h2>Event log</h2>
+      <pre id="log"></pre>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

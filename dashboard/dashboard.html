@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fleet Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Smart Bin Fleet</h1>
+      <span id="connection" class="pill">Disconnected</span>
+    </header>
+
+    <section class="card config">
+      <label>Team ID<input id="teamId" value="teamXX"></label>
+      <label>HiveMQ WSS URL<input id="brokerUrl" placeholder="wss://YOUR_CLUSTER.s1.eu.hivemq.cloud:8884/mqtt"></label>
+      <label>Username<input id="username"></label>
+      <label>Password<input id="password" type="password"></label>
+      <label>Depot latitude<input id="depotLat" type="number" step="0.000001" value="-37.8136"></label>
+      <label>Depot longitude<input id="depotLon" type="number" step="0.000001" value="144.9631"></label>
+      <button id="connectBtn">Connect dashboard</button>
+    </section>
+
+    <section id="summary" class="summary"></section>
+    <section id="analytics" class="summary"></section>
+    <section id="bins" class="bins"></section>
+
+    <section class="two-col">
+      <div class="card">
+        <h2>Live map & collection route</h2>
+        <div id="map"></div>
+        <div id="routeText" class="route-text">No route yet.</div>
+      </div>
+      <div class="card">
+        <h2>Selected bin history</h2>
+        <select id="selectedBin"></select>
+        <canvas id="historyChart"></canvas>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Validation / event log</h2>
+      <pre id="log"></pre>
+    </section>
+  </main>
+  <script src="dashboard.js"></script>
+</body>
+</html>

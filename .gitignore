@@ -1,0 +1,5 @@
+secrets.py
+wokwi/secrets.py
+.DS_Store
+__pycache__/
+*.pyc

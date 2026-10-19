@@ -1,0 +1,515 @@
+{
+
+  "version": 1,
+
+  "author": "Varshit Patel",
+
+  "editor": "wokwi",
+
+  "parts": [
+
+    {
+
+      "type": "board-pi-pico-w",
+
+      "id": "pico",
+
+      "top": 20,
+
+      "left": 30,
+
+      "attrs": {
+
+        "cyw43": "1",
+
+        "env": "micropython"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-hc-sr04",
+
+      "id": "recycled",
+
+      "top": -190,
+
+      "left": -330,
+
+      "attrs": {
+
+        "distance": "35"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-hc-sr04",
+
+      "id": "green",
+
+      "top": 0,
+
+      "left": -330,
+
+      "attrs": {
+
+        "distance": "24"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-hc-sr04",
+
+      "id": "landfill",
+
+      "top": 190,
+
+      "left": -330,
+
+      "attrs": {
+
+        "distance": "12"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-servo",
+
+      "id": "servo1",
+
+      "top": -120,
+
+      "left": 350,
+
+      "attrs": {}
+
+    },
+
+    {
+
+      "type": "wokwi-resistor",
+
+      "id": "r1",
+
+      "top": -120,
+
+      "left": -165,
+
+      "rotate": 90,
+
+      "attrs": {
+
+        "value": "1000"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-resistor",
+
+      "id": "r2",
+
+      "top": -70,
+
+      "left": -110,
+
+      "rotate": 0,
+
+      "attrs": {
+
+        "value": "2000"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-resistor",
+
+      "id": "r3",
+
+      "top": 70,
+
+      "left": -165,
+
+      "rotate": 90,
+
+      "attrs": {
+
+        "value": "1000"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-resistor",
+
+      "id": "r4",
+
+      "top": 120,
+
+      "left": -110,
+
+      "rotate": 0,
+
+      "attrs": {
+
+        "value": "2000"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-resistor",
+
+      "id": "r5",
+
+      "top": 260,
+
+      "left": -165,
+
+      "rotate": 90,
+
+      "attrs": {
+
+        "value": "1000"
+
+      }
+
+    },
+
+    {
+
+      "type": "wokwi-resistor",
+
+      "id": "r6",
+
+      "top": 310,
+
+      "left": -110,
+
+      "rotate": 0,
+
+      "attrs": {
+
+        "value": "2000"
+
+      }
+
+    }
+
+  ],
+
+  "connections": [
+
+    [
+
+      "recycled:VCC",
+
+      "pico:VBUS",
+
+      "red",
+
+      []
+
+    ],
+
+    [
+
+      "recycled:GND",
+
+      "pico:GND.1",
+
+      "black",
+
+      []
+
+    ],
+
+    [
+
+      "recycled:TRIG",
+
+      "pico:GP2",
+
+      "green",
+
+      []
+
+    ],
+
+    [
+
+      "recycled:ECHO",
+
+      "r1:1",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r1:2",
+
+      "pico:GP3",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r1:2",
+
+      "r2:1",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r2:2",
+
+      "pico:GND.1",
+
+      "black",
+
+      []
+
+    ],
+
+    [
+
+      "green:VCC",
+
+      "pico:VBUS",
+
+      "red",
+
+      []
+
+    ],
+
+    [
+
+      "green:GND",
+
+      "pico:GND.2",
+
+      "black",
+
+      []
+
+    ],
+
+    [
+
+      "green:TRIG",
+
+      "pico:GP4",
+
+      "green",
+
+      []
+
+    ],
+
+    [
+
+      "green:ECHO",
+
+      "r3:1",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r3:2",
+
+      "pico:GP5",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r3:2",
+
+      "r4:1",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r4:2",
+
+      "pico:GND.2",
+
+      "black",
+
+      []
+
+    ],
+
+    [
+
+      "landfill:VCC",
+
+      "pico:VBUS",
+
+      "red",
+
+      []
+
+    ],
+
+    [
+
+      "landfill:GND",
+
+      "pico:GND.3",
+
+      "black",
+
+      []
+
+    ],
+
+    [
+
+      "landfill:TRIG",
+
+      "pico:GP6",
+
+      "green",
+
+      []
+
+    ],
+
+    [
+
+      "landfill:ECHO",
+
+      "r5:1",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r5:2",
+
+      "pico:GP7",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r5:2",
+
+      "r6:1",
+
+      "blue",
+
+      []
+
+    ],
+
+    [
+
+      "r6:2",
+
+      "pico:GND.3",
+
+      "black",
+
+      []
+
+    ],
+
+    [
+
+      "servo1:PWM",
+
+      "pico:GP27",
+
+      "orange",
+
+      []
+
+    ],
+
+    [
+
+      "servo1:V+",
+
+      "pico:VBUS",
+
+      "red",
+
+      []
+
+    ],
+
+    [
+
+      "servo1:GND",
+
+      "pico:GND.8",
+
+      "black",
+
+      []
+
+    ]
+
+  ],
+
+  "dependencies": {}
+
+}
